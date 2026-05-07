@@ -91,32 +91,27 @@ export function ConversationItem({
       </div>
 
       {!isRenaming && (
-        <>
-          <span className="shrink-0 text-xs text-chatqa-muted group-hover:hidden">
-            {formatRelativeTime(conversation.lastMessageAt)}
-          </span>
-          <div className="hidden shrink-0 items-center gap-1 group-hover:flex">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setRenameValue(conversation.title);
-                setIsRenaming(true);
-              }}
-              className="rounded p-1 text-chatqa-muted hover:bg-chatqa-border hover:text-chatqa-text"
-            >
-              <Pencil className="h-3.5 w-3.5" />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onDelete(conversation.id);
-              }}
-              className="rounded p-1 text-chatqa-muted hover:bg-red-500/10 hover:text-red-400"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-            </button>
-          </div>
-        </>
+        <div className="hidden shrink-0 items-center gap-0.5 group-hover:flex">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setRenameValue(conversation.title);
+              setIsRenaming(true);
+            }}
+            className="rounded p-1 text-chatqa-muted hover:bg-chatqa-border hover:text-chatqa-text"
+          >
+            <Pencil className="h-3 w-3" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(conversation.id);
+            }}
+            className="rounded p-1 text-chatqa-muted hover:bg-red-500/10 hover:text-red-400"
+          >
+            <Trash2 className="h-3 w-3" />
+          </button>
+        </div>
       )}
     </motion.div>
   );
