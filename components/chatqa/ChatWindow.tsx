@@ -59,8 +59,9 @@ export function ChatWindow({
         </h2>
 
         <DropdownMenu>
-          <DropdownMenuTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-md text-chatqa-text-secondary hover:bg-chatqa-surface hover:text-chatqa-text">
-              <Download className="h-4 w-4" />
+          <DropdownMenuTrigger className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-chatqa-border px-2.5 text-xs text-chatqa-text-secondary hover:bg-chatqa-surface hover:text-chatqa-text transition-colors">
+              <Download className="h-3.5 w-3.5" />
+              <span>Export</span>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
