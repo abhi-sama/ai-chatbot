@@ -187,7 +187,7 @@ export default function ChatQA({ userId, className }: ChatQAProps) {
 
   // ─── Render ─────────────────────────────────────────────────────────────
   return (
-    <div className={`h-full ${className ?? ''}`}>
+    <div className={`flex-1 min-h-0 ${className ?? ''}`}>
       <ChatLayout
         conversations={conversations}
         activeConversationId={activeConversation?.id ?? null}

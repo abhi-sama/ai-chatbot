@@ -54,7 +54,7 @@ export function ChatLayout({
   const hasMessages = messages.length > 0;
 
   return (
-    <div className="flex h-screen w-full bg-chatqa-bg">
+    <div className="flex h-full w-full bg-chatqa-bg">
       <Sidebar
         conversations={conversations}
         activeId={activeConversationId}
