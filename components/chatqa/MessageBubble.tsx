@@ -27,14 +27,10 @@ export function MessageBubble({ message, mode, onCopy }: MessageBubbleProps) {
     setTimeout(() => setCopiedMd(false), 2000);
   };
 
-  const formattedTime = isDev
-    ? new Date(message.createdAt).toLocaleString(undefined, {
-        month: 'short', day: 'numeric',
-        hour: '2-digit', minute: '2-digit', second: '2-digit',
-      })
-    : new Date(message.createdAt).toLocaleTimeString(undefined, {
-        hour: '2-digit', minute: '2-digit',
-      });
+  const formattedTime = new Date(message.createdAt).toLocaleString(undefined, {
+    month: 'short', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+  });
 
   return (
     <motion.div

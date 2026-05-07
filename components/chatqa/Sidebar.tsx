@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { PanelLeftClose, Plus } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
@@ -19,13 +19,8 @@ const GROUP_LABELS: Record<ConversationGroup, string> = {
 const GROUP_ORDER: ConversationGroup[] = ['today', 'yesterday', 'last7days', 'older'];
 
 function SidebarContent({
-  conversations,
-  activeId,
-  onSelect,
-  onNew,
-  onDelete,
-  onRename,
-}: Omit<SidebarProps, 'isOpen' | 'onToggle'>) {
+  conversations, activeId, onSelect, onNew, onDelete, onRename, onCollapse,
+}: Omit<SidebarProps, 'isOpen' | 'onToggle'> & { onCollapse?: () => void }) {
   return (
     <div className="flex h-full flex-col bg-chatqa-sidebar">
       {/* Header */}
@@ -37,10 +32,20 @@ function SidebarContent({
             variant="ghost"
             size="icon"
             onClick={onNew}
-            className="h-8 w-8 text-chatqa-secondary hover:bg-chatqa-surface hover:text-chatqa-text"
+            className="h-8 w-8 text-chatqa-text-secondary hover:bg-chatqa-surface hover:text-chatqa-text"
           >
             <Plus className="h-4 w-4" />
           </Button>
+          {onCollapse && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onCollapse}
+              className="h-8 w-8 text-chatqa-text-secondary hover:bg-chatqa-surface hover:text-chatqa-text"
+            >
+              <PanelLeftClose className="h-4 w-4" />
+            </Button>
+          )}
         </div>
       </div>
 
@@ -50,7 +55,6 @@ function SidebarContent({
           {GROUP_ORDER.map((group) => {
             const items: Conversation[] = conversations[group];
             if (!items || items.length === 0) return null;
-
             return (
               <motion.div
                 key={group}
@@ -83,28 +87,21 @@ function SidebarContent({
 }
 
 export function Sidebar({
-  conversations,
-  activeId,
-  onSelect,
-  onNew,
-  onDelete,
-  onRename,
-  isOpen,
-  onToggle,
-}: SidebarProps) {
-  const contentProps = { conversations, activeId, onSelect, onNew, onDelete, onRename };
+  conversations, activeId, onSelect, onNew, onDelete, onRename, isOpen, onToggle, onCollapse,
+}: SidebarProps & { onCollapse?: () => void }) {
+  const contentProps = { conversations, activeId, onSelect, onNew, onDelete, onRename, onCollapse };
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className="hidden h-full w-[260px] shrink-0 border-r border-chatqa-border md:block">
+      {/* Desktop sidebar — width controlled by parent */}
+      <div className="hidden h-full shrink-0 overflow-hidden md:block">
         <SidebarContent {...contentProps} />
-      </aside>
+      </div>
 
       {/* Mobile sidebar (Sheet) */}
       <Sheet open={isOpen} onOpenChange={onToggle}>
         <SheetContent side="left" className="w-[260px] p-0 border-chatqa-border">
-          <SidebarContent {...contentProps} />
+          <SidebarContent {...contentProps} onCollapse={undefined} />
         </SheetContent>
       </Sheet>
     </>
