@@ -87,6 +87,7 @@ export interface ChatSettings {
   mode: ChatMode;
   model: ModelId;
   dataSource: DataSource;
+  planMode: boolean;
 }
 
 // ─── Hook Return Types ───────────────────────────────────────────────────────
@@ -181,6 +182,7 @@ export interface SendMessageParams {
   model: ModelId;
   dataSource: DataSource;
   mode: ChatMode;
+  planMode: boolean;
   attachments?: Attachment[];
 }
 

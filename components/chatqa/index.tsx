@@ -44,6 +44,7 @@ export default function ChatQA({ userId, className }: ChatQAProps) {
     mode: 'assistant',
     model: 'claude-3-5-sonnet-20241022',
     dataSource: 'both',
+    planMode: false,
   });
 
   const [promptLibraryOpen, setPromptLibraryOpen] = useState(false);

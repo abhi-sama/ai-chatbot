@@ -182,6 +182,7 @@ export function useChat({
           model: settings.model,
           dataSource: settings.dataSource,
           mode: settings.mode,
+          planMode: settings.planMode,
           attachments: userMessage.attachments,
         });
 

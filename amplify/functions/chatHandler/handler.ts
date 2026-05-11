@@ -10,6 +10,7 @@ interface ChatHandlerEvent {
   model: string;
   dataSource: string;
   mode: string;
+  planMode: boolean;
   attachments?: Array<{
     id: string;
     fileName: string;
@@ -38,13 +39,14 @@ interface StreamChunk {
 export const handler = async (
   event: ChatHandlerEvent
 ): Promise<ChatHandlerResponse> => {
-  const { conversationId, content, model, dataSource, mode, attachments } = event;
+  const { conversationId, content, model, dataSource, mode, planMode, attachments } = event;
 
   console.log('[chatHandler] Received request:', {
     conversationId,
     model,
     dataSource,
     mode,
+    planMode,
     attachmentCount: attachments?.length ?? 0,
   });
 
@@ -74,7 +76,7 @@ export const handler = async (
   //     'Content-Type': 'application/json',
   //     'Authorization': `Bearer ${credentials.SessionToken}`,
   //   },
-  //   body: JSON.stringify({ conversationId, content, model, dataSource, mode, attachments }),
+  //   body: JSON.stringify({ conversationId, content, model, dataSource, mode, planMode, attachments }),
   // });
   // const reader = response.body.getReader();
 

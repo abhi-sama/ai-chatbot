@@ -9,6 +9,7 @@ import { VoiceButton } from './VoiceButton';
 import { ModelSelector } from './ModelSelector';
 import { DataSourceToggle } from './DataSourceToggle';
 import { ModeSelector } from './ModeSelector';
+import { PlanModeToggle } from './PlanModeToggle';
 import type { InputBarProps, ChatSettings } from '@/types/chatqa';
 
 interface ExtendedInputBarProps extends InputBarProps {
@@ -165,7 +166,11 @@ export function InputBar({
             />
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <PlanModeToggle
+              enabled={settings.planMode}
+              onChange={(planMode) => onSettingsChange({ planMode })}
+            />
             {isStreaming ? (
               <Button
                 size="icon"
